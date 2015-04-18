@@ -1,7 +1,6 @@
 package com.kwanggoo.searchword.network;
 
 import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 
 /**
  * Created by josunghwan on 15. 4. 18..
