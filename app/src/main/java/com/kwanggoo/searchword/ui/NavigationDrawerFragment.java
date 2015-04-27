@@ -1,4 +1,4 @@
-package com.kwanggoo.searchword;
+package com.kwanggoo.searchword.ui;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,7 +21,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kwanggoo.searchword.R;
+import com.kwanggoo.searchword.UserInfo;
+import com.kwanggoo.searchword.widget.AutoResizeTextView;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -39,6 +46,7 @@ public class NavigationDrawerFragment extends Fragment {
      * expands it. This shared preference tracks this.
      */
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
+    private static final String TAG = NavigationDrawerFragment.class.getSimpleName();
 
     /**
      * A pointer to the current callbacks instance (the Activity).
@@ -53,6 +61,11 @@ public class NavigationDrawerFragment extends Fragment {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
+    private ProgressBar mWordRateProgressBar;
+    private TextView tvEmail;
+    private AutoResizeTextView tvWords;
+    private TextView tvUrl;
+    private TextView tvWordRate;
 
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
@@ -108,6 +121,12 @@ public class NavigationDrawerFragment extends Fragment {
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         mDrawerListView.setFitsSystemWindows(true);
+
+        mWordRateProgressBar = (ProgressBar) rootView.findViewById(R.id.word_rate_progressbar);
+        tvEmail = (TextView) rootView.findViewById(R.id.tv_email);
+        tvWords = (AutoResizeTextView) rootView.findViewById(R.id.tv_words);
+        tvUrl = (TextView) rootView.findViewById(R.id.tv_url);
+        tvWordRate = (TextView) rootView.findViewById(R.id.tv_word_rate);
         return rootView;
     }
 
@@ -124,7 +143,6 @@ public class NavigationDrawerFragment extends Fragment {
     public void setUp(int fragmentId, DrawerLayout drawerLayout) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
-//        mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.teal_700));
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -168,8 +186,8 @@ public class NavigationDrawerFragment extends Fragment {
                             .getDefaultSharedPreferences(getActivity());
                     sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
-
                 getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                refreshProfileView();
             }
         };
 
@@ -188,6 +206,29 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
+    private void refreshProfileView() {
+        UserInfo userInfo = UserInfo.getInstance();
+
+        tvEmail.setText(getString(R.string.user_email));
+
+        int allWordCount = userInfo.getAllWordCount();
+        int knownWordCount = userInfo.getKnownWordCount();
+        String wordsText = String.format("%d / %d", knownWordCount, allWordCount);
+        tvWords.setText(wordsText);
+
+        String urlText = String.format("%d urls", userInfo.getUrlCount());
+        tvUrl.setText(urlText);
+        int wordRate;
+        try {
+            wordRate = (int) (((float)knownWordCount / allWordCount)*100);
+        }catch (ArithmeticException e){
+            wordRate = 0;
+        }
+        mWordRateProgressBar.setProgress(wordRate);
+        String rateText = String.format("%d%%", wordRate);
+        tvWordRate.setText(rateText);
     }
 
     private void selectItem(int position) {

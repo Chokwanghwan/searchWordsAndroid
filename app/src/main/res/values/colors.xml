@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">@color/teal_500</color>
-    <color name="color_primary_dark">@color/teal_700</color>
+    <color name="color_primary">@color/grey_500</color>
+    <color name="color_primary_dark">@color/grey_700</color>
+    <color name="color_accent">@android:color/white</color>
 
-    <color name="teal_100">#B2DFDB</color>
     <!--500 is main primary color-->
-    <color name="teal_500">#009688</color>
-    <color name="teal_700">#00796B</color>
+    <color name="grey_100">#CFD8DC</color>
+    <color name="grey_200">#B0BEC5</color>
+    <color name="grey_500">#607D8B</color>
+    <color name="grey_700">#455A64</color>
 
-    <color name="amber_100">#FFECB3</color>
     <!--200 is main secondary color-->
-    <color name="amber_200">#FFE082</color>
-    <color name="amber_400">#FFCA28</color>
+    <color name="red_100">#FF8A80</color>
+    <color name="red_200">#FF5252</color>
+    <color name="red_400">#FF1744</color>
+    <color name="red_700">#D50000</color>
 
 </resources>

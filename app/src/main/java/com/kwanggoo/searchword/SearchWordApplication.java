@@ -1,7 +1,6 @@
 package com.kwanggoo.searchword;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.kwanggoo.searchword.bus.BusProvider;
 import com.kwanggoo.searchword.network.SearchWordApi;

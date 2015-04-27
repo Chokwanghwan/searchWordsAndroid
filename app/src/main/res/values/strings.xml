@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">searchword</string>
+    <string name="app_name">MyWords</string>
 
-    <string name="title_section1">메인</string>
-    <string name="title_section2">삭제한단어</string>
+    <string name="title_section1">공부할 단어들</string>
+    <string name="title_section2">알고있는 단어들</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="api_host">API_HOST</string>
+    <string name="api_host">http://54.92.37.26</string>
+
+    <string name="user_email">choBro@gmail.com</string>
 
 </resources>

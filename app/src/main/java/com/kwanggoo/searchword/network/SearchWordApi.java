@@ -1,11 +1,14 @@
 package com.kwanggoo.searchword.network;
 
-import java.util.Map;
+import com.kwanggoo.searchword.UserInfo;
+import com.kwanggoo.searchword.Word;
 
+import java.util.HashMap;
+
+import retrofit.Callback;
 import retrofit.http.FieldMap;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
-import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Query;
 
@@ -14,18 +17,28 @@ import retrofit.http.Query;
  */
 public interface SearchWordApi {
 
-//    @FormUrlEncoded
-//    @Headers("Accept: application/json")
-//    @POST("/api/v1/user/password")
-//    void patchPassword(
-//            @FieldMap Map<String, String> fields,
-//            Callback<UserResponse> callback
-//    );
-//
-//    @Headers("Accept: application/json")
-//    @GET("/api/v1/payments/clogs")
-//    void getCoinHistory(
-//            @Query("auth_token") String psqToken,
-//            Callback<CoinHistory[]> callBack
-//    );
+    @FormUrlEncoded
+    @POST("/searchWords/updateData")
+    void updateWord(
+            @FieldMap HashMap<String, String> body,
+            Callback<String> callback
+    );
+
+    @GET("/searchWords/selectDataForMobile")
+    void getWords(
+            @Query("email") String email,
+            Callback<Word[]> callBack
+    );
+
+    @GET("/searchWords/selectDeletedDataForMobile")
+    void getKnownWords(
+            @Query("email") String email,
+            Callback<Word[]> callBack
+    );
+
+    @GET("/userInfo")
+    void getUserInfo(
+            @Query("email") String email,
+            Callback<UserInfo> callBack
+    );
 }

@@ -5,12 +5,84 @@
     android:layout_gravity="left|start"
     tools:context=".NavigationDrawerFragment"
     android:orientation="vertical">
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/teal_700">
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:background="@color/color_primary">
+        <RelativeLayout
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:padding="@dimen/default_padding">
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="choBro@gmail.com"
+                android:id="@+id/tv_email"
+                android:textColor="@color/grey_200"
+                android:textSize="@dimen/text_default"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true" />
+
+            <com.kwanggoo.searchword.widget.AutoResizeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0/0"
+                android:id="@+id/tv_words"
+                android:textColor="@android:color/white"
+                android:maxLines="1"
+                android:gravity="center"
+                android:textSize="56dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15 urls"
+                android:id="@+id/tv_url"
+                android:textColor="@color/grey_200"
+                android:textSize="@dimen/text_default"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_100">
+        </View>
+        <LinearLayout
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:padding="@dimen/default_padding">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_weight="0.9"
+                android:layout_height="match_parent"
+                android:id="@+id/word_rate_progressbar"
+                android:progressDrawable="@drawable/words_rate_progressbar"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="match_parent"
+                android:text="50%"
+                android:id="@+id/tv_word_rate"
+                android:textSize="@dimen/text_small"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical|right" />
+        </LinearLayout>
+    </LinearLayout>
     <!-- Your drawer content -->
     <ListView
         android:id="@+id/drawer_listivew"
@@ -19,5 +91,5 @@
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:background="#cccc" />
+        android:background="@android:color/white" />
 </LinearLayout>

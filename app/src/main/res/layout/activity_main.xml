@@ -21,7 +21,9 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:minHeight="?attr/actionBarSize"
-            android:background="?attr/colorPrimary" />
+            android:theme="@style/SearchWord.Toolbar.Theme"
+            app:titleTextAppearance="@style/SearchWord.Toolbar.Title"
+            android:background="@color/color_primary" />
 
         <FrameLayout
             android:id="@+id/container"
@@ -42,7 +44,7 @@
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:name="com.kwanggoo.searchword.NavigationDrawerFragment"
+        android:name="com.kwanggoo.searchword.ui.NavigationDrawerFragment"
         tools:layout="@layout/fragment_navigation_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
