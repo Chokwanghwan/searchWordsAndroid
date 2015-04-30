@@ -14,6 +14,11 @@
         <item name="android:textColorPrimaryInverse">@android:color/white</item>
         <item name="android:actionMenuTextColor">@android:color/white</item>
         <item name="drawerArrowStyle">@style/MyDrawerArrowToggle</item>
+
+        <item name="md_dark_theme">false</item>
+        <item name="md_background_color">@android:color/white</item>
+        <item name="md_title_color">@android:color/black</item>
+        <item name="md_content_color">@android:color/darker_gray</item>
     </style>
 
     <!-- ToolBar -->
