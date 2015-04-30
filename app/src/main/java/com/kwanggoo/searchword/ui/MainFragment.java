@@ -64,6 +64,7 @@ public class MainFragment extends SearchWordFragment implements SearchView.OnQue
         mSearchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getActivity().getComponentName()));
         mSearchView.setOnQueryTextListener(this);
+        mSearchView.setIconified(false);
     }
 
     @Override
