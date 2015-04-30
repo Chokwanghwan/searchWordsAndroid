@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_primary"
+    android:orientation="vertical"
+    tools:context="com.kwanggoo.searchword.ui.SignActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MyWords"
+        android:id="@+id/textView2"
+        android:textSize="@dimen/text_huge"
+        android:textStyle="bold"
+        android:shadowColor="@android:color/darker_gray"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="181dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:textSize="@dimen/text_medium"
+        android:hint="Email"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@android:color/white"
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시작하기"
+        android:id="@+id/button"
+        android:layout_marginBottom="163dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

@@ -15,5 +15,5 @@
     <string name="add_url_hint">http://www.google.com</string>
     <string name="add_url_prefill" />
     <string name="add_url_cancel">Cancel</string>
-
+    <string name="title_activity_sign">SignActivity</string>
 </resources>
