@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.kwanggoo.searchword.R;
 import com.kwanggoo.searchword.UserInfo;
 import com.kwanggoo.searchword.Word;
@@ -64,7 +66,6 @@ public class MainFragment extends SearchWordFragment implements SearchView.OnQue
         mSearchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getActivity().getComponentName()));
         mSearchView.setOnQueryTextListener(this);
-        mSearchView.setIconified(false);
     }
 
     @Override
@@ -118,12 +119,32 @@ public class MainFragment extends SearchWordFragment implements SearchView.OnQue
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Click FAB", Toast.LENGTH_SHORT).show();
+                onClickFab(v);
             }
         });
         BusProvider.getBus().post(new GetWordsEvent(getString(R.string.user_email)));
 
         return rootView;
+    }
+
+    private void onClickFab(View v) {
+        mFab.hide(true);
+        new MaterialDialog.Builder(getActivity())
+                .widgetColorRes(R.color.color_accent)
+                .title(R.string.add_url_title)
+                .inputType(InputType.TYPE_CLASS_TEXT)
+                .input(R.string.add_url_hint, R.string.add_url_prefill, false, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(MaterialDialog dialog, CharSequence input) {
+                        // Do something
+                    }
+                })
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        Toast.makeText(getActivity(), "ADD URL", Toast.LENGTH_SHORT).show();
+                    }
+                }).show();
     }
 
     @Override

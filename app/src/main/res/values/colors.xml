@@ -2,7 +2,9 @@
 <resources>
     <color name="color_primary">@color/grey_500</color>
     <color name="color_primary_dark">@color/grey_700</color>
-    <color name="color_accent">@android:color/white</color>
+    <!--<color name="color_accent">@android:color/white</color>-->
+    <color name="color_accent">@color/red_200</color>
+
 
     <!--500 is main primary color-->
     <color name="grey_100">#CFD8DC</color>

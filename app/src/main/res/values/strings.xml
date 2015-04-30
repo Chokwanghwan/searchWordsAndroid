@@ -11,5 +11,8 @@
     <string name="user_email">choBro@gmail.com</string>
     <string name="search_title">검색하기</string>
     <string name="search_hint">단어 검색하기</string>
+    <string name="add_url_title">URL을 입력해주세요.</string>
+    <string name="add_url_hint">eg)http://www.google.com</string>
+    <string name="add_url_prefill" />
 
 </resources>
