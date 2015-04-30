@@ -3,6 +3,7 @@ package com.kwanggoo.searchword.ui;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -139,10 +140,23 @@ public class MainFragment extends SearchWordFragment implements SearchView.OnQue
                         // Do something
                     }
                 })
+                .cancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        mFab.show(true);
+                    }
+                })
+                .negativeText(R.string.add_url_cancel)
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         Toast.makeText(getActivity(), "ADD URL", Toast.LENGTH_SHORT).show();
+                        mFab.show(true);
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        mFab.show(true);
                     }
                 }).show();
     }
