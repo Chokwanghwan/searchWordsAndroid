@@ -1,6 +1,7 @@
 package com.kwanggoo.searchword.ui;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -9,17 +10,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Toast;
 
 import com.kwanggoo.searchword.R;
 import com.kwanggoo.searchword.UserInfo;
 import com.kwanggoo.searchword.bus.BusProvider;
 import com.kwanggoo.searchword.bus.event.GetUserInfo;
 import com.kwanggoo.searchword.bus.event.LoadUserInfo;
+import com.kwanggoo.searchword.util.UserManager;
 import com.squareup.otto.Subscribe;
 
 import java.util.HashMap;
 
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks{
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -67,7 +70,8 @@ public class MainActivity extends ActionBarActivity
     public void onResume() {
         super.onResume();
         BusProvider.getBus().register(this);
-        BusProvider.getBus().post(new GetUserInfo(getString(R.string.user_email)));
+        String email = UserManager.getInstance(this).getUserEmail();
+        BusProvider.getBus().post(new GetUserInfo(email));
     }
 
     @Override
@@ -78,11 +82,23 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        if(position == 2){
+            UserManager.getInstance(this).logout();
+            startSign();
+            return;
+        }
         FragmentManager fragmentManager = getSupportFragmentManager();
         SearchWordFragment fragment = mFragmentMap.get(position);
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
+    }
+
+    private void startSign() {
+        Intent intent = new Intent(this, SignActivity.class);
+        Toast.makeText(this, "로그아웃 완료.", Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+        finish();
     }
 
     public void onSectionAttached(int number) {

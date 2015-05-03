@@ -8,7 +8,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="api_host">http://54.92.37.26</string>
 
-    <string name="user_email">choBro@gmail.com</string>
     <string name="search_title">검색하기</string>
     <string name="search_hint">단어 검색하기</string>
     <string name="add_url_title">URL을 입력해주세요.</string>
@@ -16,4 +15,5 @@
     <string name="add_url_prefill" />
     <string name="add_url_cancel">Cancel</string>
     <string name="title_activity_sign">SignActivity</string>
+    <string name="title_section3">로그아웃</string>
 </resources>

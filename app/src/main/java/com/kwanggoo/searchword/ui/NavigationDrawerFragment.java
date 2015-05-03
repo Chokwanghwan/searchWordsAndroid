@@ -1,6 +1,6 @@
 package com.kwanggoo.searchword.ui;
 
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.kwanggoo.searchword.R;
 import com.kwanggoo.searchword.UserInfo;
+import com.kwanggoo.searchword.util.UserManager;
 import com.kwanggoo.searchword.widget.AutoResizeTextView;
 
 /**
@@ -118,6 +119,7 @@ public class NavigationDrawerFragment extends Fragment {
                 new String[]{
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
+                        getString(R.string.title_section3)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         mDrawerListView.setFitsSystemWindows(true);
@@ -211,7 +213,8 @@ public class NavigationDrawerFragment extends Fragment {
     private void refreshProfileView() {
         UserInfo userInfo = UserInfo.getInstance();
 
-        tvEmail.setText(getString(R.string.user_email));
+        String email = UserManager.getInstance(getActivity()).getUserEmail();
+        tvEmail.setText(email);
 
         int allWordCount = userInfo.getAllWordCount();
         int knownWordCount = userInfo.getKnownWordCount();
@@ -310,7 +313,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private ActionBar getActionBar() {
-        return ((ActionBarActivity) getActivity()).getSupportActionBar();
+        return ((AppCompatActivity) getActivity()).getSupportActionBar();
     }
 
     /**

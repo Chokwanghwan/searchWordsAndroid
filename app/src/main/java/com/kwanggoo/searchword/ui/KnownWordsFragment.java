@@ -17,6 +17,7 @@ import com.kwanggoo.searchword.bus.BusProvider;
 import com.kwanggoo.searchword.bus.event.GetKnownWordsEvent;
 import com.kwanggoo.searchword.bus.event.LoadKnownWordsEvent;
 import com.kwanggoo.searchword.bus.event.UpdateWordsEvent;
+import com.kwanggoo.searchword.util.UserManager;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -87,7 +88,8 @@ public class KnownWordsFragment extends SearchWordFragment {
                         });
 
         mRecyclerView.addOnItemTouchListener(swipeTouchListener);
-        BusProvider.getBus().post(new GetKnownWordsEvent(getString(R.string.user_email)));
+        String email = UserManager.getInstance(getActivity()).getUserEmail();
+        BusProvider.getBus().post(new GetKnownWordsEvent(email));
 
         return rootView;
     }
@@ -105,7 +107,8 @@ public class KnownWordsFragment extends SearchWordFragment {
             mAdapter.notifyItemRemoved(position);
             UserInfo userInfo = UserInfo.getInstance();
             userInfo.minusKnownWordCount();
-            BusProvider.getBus().post(new UpdateWordsEvent(getString(R.string.user_email), english, false));
+            String email = UserManager.getInstance(getActivity()).getUserEmail();
+            BusProvider.getBus().post(new UpdateWordsEvent(email, english, false));
         }
         mAdapter.notifyDataSetChanged();
     }

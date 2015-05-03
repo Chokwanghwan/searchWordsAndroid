@@ -26,6 +26,7 @@ import com.kwanggoo.searchword.bus.BusProvider;
 import com.kwanggoo.searchword.bus.event.GetWordsEvent;
 import com.kwanggoo.searchword.bus.event.LoadWordsEvent;
 import com.kwanggoo.searchword.bus.event.UpdateWordsEvent;
+import com.kwanggoo.searchword.util.UserManager;
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.otto.Subscribe;
 
@@ -123,7 +124,8 @@ public class MainFragment extends SearchWordFragment implements SearchView.OnQue
                 onClickFab(v);
             }
         });
-        BusProvider.getBus().post(new GetWordsEvent(getString(R.string.user_email)));
+        String email = UserManager.getInstance(getActivity()).getUserEmail();
+        BusProvider.getBus().post(new GetWordsEvent(email));
 
         return rootView;
     }
@@ -186,7 +188,8 @@ public class MainFragment extends SearchWordFragment implements SearchView.OnQue
             UserInfo userInfo = UserInfo.getInstance();
             userInfo.plusKnownWordCount();
 
-            BusProvider.getBus().post(new UpdateWordsEvent(getString(R.string.user_email), english, true));
+            String email = UserManager.getInstance(getActivity()).getUserEmail();
+            BusProvider.getBus().post(new UpdateWordsEvent(email, english, true));
         }
         mAdapter.notifyDataSetChanged();
     }
