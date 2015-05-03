@@ -23,6 +23,7 @@ import com.kwanggoo.searchword.UserInfo;
 import com.kwanggoo.searchword.Word;
 import com.kwanggoo.searchword.WordAdapter;
 import com.kwanggoo.searchword.bus.BusProvider;
+import com.kwanggoo.searchword.bus.event.AddUrlEvent;
 import com.kwanggoo.searchword.bus.event.GetWordsEvent;
 import com.kwanggoo.searchword.bus.event.LoadWordsEvent;
 import com.kwanggoo.searchword.bus.event.UpdateWordsEvent;
@@ -139,7 +140,11 @@ public class MainFragment extends SearchWordFragment implements SearchView.OnQue
                 .input(R.string.add_url_hint, R.string.add_url_prefill, false, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(MaterialDialog dialog, CharSequence input) {
-                        // Do something
+                        String userInput = input.toString();
+                        Toast.makeText(getActivity(), userInput + "이 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                        String userEmail = UserManager.getInstance(getActivity()).getUserEmail();
+                        BusProvider.getBus().post(new AddUrlEvent(userEmail, userInput));
+                        mFab.show(true);
                     }
                 })
                 .cancelListener(new DialogInterface.OnCancelListener() {
@@ -150,12 +155,6 @@ public class MainFragment extends SearchWordFragment implements SearchView.OnQue
                 })
                 .negativeText(R.string.add_url_cancel)
                 .callback(new MaterialDialog.ButtonCallback() {
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        Toast.makeText(getActivity(), "ADD URL", Toast.LENGTH_SHORT).show();
-                        mFab.show(true);
-                    }
-
                     @Override
                     public void onNegative(MaterialDialog dialog) {
                         mFab.show(true);

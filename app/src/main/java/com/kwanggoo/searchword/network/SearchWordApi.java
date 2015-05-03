@@ -41,4 +41,11 @@ public interface SearchWordApi {
             @Query("email") String email,
             Callback<UserInfo> callBack
     );
+
+    @FormUrlEncoded
+    @POST("/searchWords/insertDataForMobile")
+    void addUrl(
+            @FieldMap HashMap<String, String> body,
+            Callback<String> callback
+    );
 }

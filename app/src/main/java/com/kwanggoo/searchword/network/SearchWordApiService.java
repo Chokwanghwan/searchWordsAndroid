@@ -3,6 +3,8 @@ package com.kwanggoo.searchword.network;
 import com.kwanggoo.searchword.UpdateWord;
 import com.kwanggoo.searchword.UserInfo;
 import com.kwanggoo.searchword.Word;
+import com.kwanggoo.searchword.bus.event.AddUrlEvent;
+import com.kwanggoo.searchword.bus.event.AddedUrlEvent;
 import com.kwanggoo.searchword.bus.event.GetKnownWordsEvent;
 import com.kwanggoo.searchword.bus.event.GetUserInfo;
 import com.kwanggoo.searchword.bus.event.GetWordsEvent;
@@ -96,6 +98,26 @@ public class SearchWordApiService {
             public void success(UserInfo userInfo, Response response) {
                 UserInfo.setUserInfo(userInfo);
                 mBus.post(new LoadUserInfo());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+
+    @Subscribe
+    public void onAddUrl(AddUrlEvent event){
+        String url = event.getUrl();
+        String email = event.getEmail();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("email", email);
+        params.put("url", url);
+        mApi.addUrl(params, new Callback<String>() {
+            @Override
+            public void success(String s, Response response) {
+                mBus.post(new AddedUrlEvent(s));
             }
 
             @Override
